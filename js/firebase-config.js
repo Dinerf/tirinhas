@@ -1,9 +1,9 @@
 var config = {
-  apiKey: "AIzaSyCZX9X4Nsz02j6QnzKtsKxNLXpXxomCKYE",
-  authDomain: "projeto-teste-49d6c.firebaseapp.com",
-  databaseURL: "https://projeto-teste-49d6c.firebaseio.com",
-  projectId: "projeto-teste-49d6c",
-  storageBucket: "projeto-teste-49d6c.appspot.com",
-  messagingSenderId: "434955727160"
+  apiKey: "AIzaSyAVw3p99R-6WwH_CtPHBRpr4eYAaYQX_0M",
+  authDomain: "tirinhas-b67c1.firebaseapp.com",
+  databaseURL: "https://tirinhas-b67c1.firebaseio.com",
+  projectId: "tirinhas-b67c1",
+  storageBucket: "tirinhas-b67c1.appspot.com",
+  messagingSenderId: "969928389793"
 };
 firebase.initializeApp(config);
