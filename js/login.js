@@ -2,8 +2,8 @@ $(document).ready(function() {
   $('.signUpBtn').click(function(event) {
     event.preventDefault();
 
-    var email = $('.signUpEmail').val();
-    var password = $('.signUpPassword').val();
+    var email = $('.userEmail').val();
+    var password = $('.userPassword').val();
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(response) {
@@ -21,15 +21,13 @@ $(document).ready(function() {
   $('.signInBtn').click(function(event) {
     event.preventDefault();
 
-    var email = $('.signInEmail').val();
-    var password = $('.signInPassword').val();
+    var email = $('.userEmail').val();
+    var password = $('.userPassword').val();
 
     
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(response) {
-      window.location = 'index.html?id=' + response.user.uid;
-      // console.log(response.uid);
-      
+      window.location = 'index.html?id=' + response.user.uid;      
     })
     .catch(function(error) {
     
