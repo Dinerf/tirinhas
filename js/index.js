@@ -20,7 +20,6 @@ $(document).ready(function() {
       });
     });
   });
-
     
   $('.addItem').click(function(event) {
     event.preventDefault();
@@ -42,9 +41,13 @@ $(document).ready(function() {
     });
 
   }); 
-
-
-
-
-
+  
 });
+
+
+
+
+
+
+
+
