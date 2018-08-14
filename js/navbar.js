@@ -20,10 +20,10 @@ $(document).ready(function() {
   $('#profile').click(function() {
     $('#header').addClass('d-flex').removeClass('d-none');
   });
-  $('.textPostButton').click(function() {
-    $('<div>').attr('class', 'postConteiner border m-2 d-flex').html(textPosted).appendTo('#feed');
-  });
 
+  $('.textPostButton').click(function() {
+    buttonPost();
+  });
   
 
 });
