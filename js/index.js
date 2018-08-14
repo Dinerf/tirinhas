@@ -2,6 +2,11 @@ var database = firebase.database();
 var USER_ID = window.location.search.match(/\?id=(.*)/);
 
 $(document).ready(function() {
+  $('.navbar-opt').click(function(event) {
+    $('.collapse-opt').collapse('hide');
+    $(event.target).collapse('show');
+  });
+  
   database.ref('toDo/' + USER_ID).once('value')
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {

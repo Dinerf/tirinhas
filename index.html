@@ -15,7 +15,57 @@
     <link rel="stylesheet" type="text/css" media="screen" href="css/index.css" />
   </head>
   <body>
-    
+    <div class="pos-f-t">
+      <div class="collapse" id="navbarToggleExternalContent">
+        <div class="bg-dark p-2 d-flex justify-content-around">
+          <button class="navbar-toggler text-white">
+          <i class="fas fa-home"></i>
+          </button>
+          <button class="navbar-toggler text-white">
+          <i class="fas fa-user-friends"></i>
+          </button>
+          <button class="navbar-toggler text-white">
+          <i class="far fa-user-circle"></i>
+          </button>
+          <button class="navbar-toggler navbar-opt" type="button" data-toggle="collapse" data-target="#ToggleTextPost" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-align-left text-white"></i>
+          </button>
+          <button class="navbar-toggler navbar-opt" type="button" data-toggle="collapse" data-target="#ToggleImagePost" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="far fa-image text-white"></i>
+          </button>
+          <button class="navbar-toggler navbar-opt" type="button" data-toggle="collapse" data-target="#ToggleSearch" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-search text-white"></i>
+          </button>
+        </div>
+        <div class="pos-f-t">
+          <div class="collapse collapse-opt" id="ToggleTextPost">
+            <div class="bg-dark p-4">
+              <h5 class="text-white h4">Text Post</h5>
+            </div>
+          </div>
+        </div>
+        <div class="pos-f-t">
+          <div class="collapse collapse-opt" id="ToggleImagePost">
+            <div class="bg-dark p-4">
+              <h5 class="text-white h4">Image Post</h5>
+            </div>
+          </div>
+        </div>
+        <div class="pos-f-t">
+          <div class="collapse collapse-opt" id="ToggleSearch">
+            <div class="bg-dark p-4">
+              <h5 class="text-white h4">Search</h5>
+            </div>
+          </div>
+        </div>          
+      </div>
+      <nav class="navbar navbar-dark bg-dark p-0">
+        <button class="navbar-toggler w-100 m-0 p-0" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fas fa-ellipsis-h p-0 m-0"></i>
+        </button>
+      </nav>
+    </div>
+
     <form class="text-center">
       <div class="form-group">
         <label for="text">Diga algo sobre a tirinha...</label>
