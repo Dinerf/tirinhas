@@ -118,7 +118,7 @@ function createComment(text, key) {
 database.ref("users/" + USER_ID).once("value")
   .then(function(snapshot) {
     var userInfo = snapshot.val();
-    // $('userName').text(userInfo.name);
+    $('.userName').text(userInfo.name);
   })
 
 database.ref('users').once('value')
@@ -132,7 +132,7 @@ database.ref('users').once('value')
 
 function createUsers(name, key) {
   if (key !== USER_ID) {
-    $(".usersList").append(`
+    $(".user-name").append(`
       <li>
         <span>${name}</span>
         <button data-user-id="${key}">Seguir</button>
@@ -146,3 +146,20 @@ function createUsers(name, key) {
     });
   })
 }
+
+$('.signUpBtn').click(function() {
+  getUser($('.userName').val());
+});
+
+function getUser(name) {
+  var data = {
+    name: name
+  }
+
+  return firebase.database().ref('users').push(data); 
+  // return firebase.database().ref().child('users').push(data);
+  // return database.ref('users/' + USER_ID).push({
+  //   name: name
+  // });
+};
+
