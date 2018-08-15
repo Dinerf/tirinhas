@@ -114,30 +114,34 @@ function createComment(text, key) {
 }
 
 // Amigos
-var usersList = $('.usersList');
-var userName = $('.userName');
+database.ref("users/" + USER_ID).once("value")
+  .then(function(snapshot) {
+    var userInfo = snapshot.val();
+    userName.text(userInfo.name);
+  })
 
-$('.userBtn').click(function() {
-  getUser(userName.val());
-});
+database.ref('users').once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      createUsers(childData.name, childKey);
+    });
+  })
 
-function getUser(name) {
-  var data = {
-    name: name
+function createUsers(name, key) {
+  if (key !== USER_ID) {
+    $(".usersList").append(`
+      <li>
+        <span>${name}</span>
+        <button data-user-id="${key}">Seguir</button>
+      </li>
+    `);
   }
 
-  return firebase.database().ref().child('users').push(data);
-  // return database.ref('users/' + USER_ID).push({
-  //   name: name
-  // });
-};
-
-firebase.database().ref('users').on('value', function(snapshot) {
-  usersList.innerHTML = '';
-  
-  snapshot.forEach(function(item) {
-    var li = document.createElement('li');
-    li.appendChild(document.createTextNode(item.val().name));
-    usersList.appendChild(li);
-  });
-});
+  $(`button[data-user-id=${key}]`).click(function() {
+    database.ref('friendship/' + USER_ID).push({
+      friendId: key
+    });
+  })
+}
