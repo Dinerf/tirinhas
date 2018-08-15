@@ -115,7 +115,7 @@ function createComment(text, key) {
 }
 
 // Amigos
-database.ref("users/" + USER_ID).once("value")
+database.ref('users/' + USER_ID).once('value')
   .then(function(snapshot) {
     var userInfo = snapshot.val();
     $('.userName').text(userInfo.name);
@@ -132,7 +132,7 @@ database.ref('users').once('value')
 
 function createUsers(name, key) {
   if (key !== USER_ID) {
-    $(".user-name").append(`
+    $('.user-name').append(`
       <li>
         <span>${name}</span>
         <button data-user-id="${key}">Seguir</button>
@@ -162,4 +162,6 @@ function getUser(name) {
   //   name: name
   // });
 };
+
+
 
