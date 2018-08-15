@@ -1,10 +1,11 @@
 $(document).ready(function() {
   getPostsFromDB();
+  getNameFromDB()
 });
 
 var database = firebase.database();
 var USER_ID = window.location.search.match(/\?id=(.*)/)[1];
-var userName = $('.userName').val();
+var userName;
 var childKey;
 var childData;
 var userPhoto;
@@ -14,7 +15,7 @@ var commentKey;
 function buttonPost(event) {
   newPost = $('.newPost').val();
   var postFromDB = addPostToDB(newPost);
-  createTemplate(newPost, postFromDB.key)
+  createTemplate(newPost, postFromDB.key, userName)
   createPost(newPost, postFromDB.key)
 }
 
@@ -46,6 +47,14 @@ function getPostsFromDB() {
         createTemplate(childData.text, childKey, userName)
         createPost(childData.text, childKey)
       });
+    });
+}
+
+function getNameFromDB() {
+  database.ref('users/' + USER_ID).once('value')
+    .then(function(snapshot) {
+      userName = snapshot.val().name;
+      console.log(userName);
     });
 }
 
@@ -146,22 +155,3 @@ function createUsers(name, key) {
     });
   })
 }
-
-$('.signUpBtn').click(function() {
-  getUser($('.userName').val());
-});
-
-function getUser(name) {
-  var data = {
-    name: name
-  }
-
-  return firebase.database().ref('users').push(data); 
-  // return firebase.database().ref().child('users').push(data);
-  // return database.ref('users/' + USER_ID).push({
-  //   name: name
-  // });
-};
-
-
-

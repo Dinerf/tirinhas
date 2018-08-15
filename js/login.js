@@ -11,7 +11,7 @@ $(document).ready(function() {
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(response) {
         var userId = response.user.uid;
-        database.ref("users/" + userId).set({
+        database.ref('users/' + userId).set({
           name: name,
           email: email
         });
