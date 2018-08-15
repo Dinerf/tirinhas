@@ -15,7 +15,7 @@ $(document).ready(function() {
           name: name,
           email: email
         });
-        window.location = 'index.html?id=' + response.user.uid;
+        window.location = 'app.html?id=' + response.user.uid;
         console.log(response);
       })
       .catch(function(error) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
     
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(response) {
-      window.location = 'index.html?id=' + response.user.uid;      
+      window.location = 'app.html?id=' + response.user.uid;      
     })
     .catch(function(error) {
     
