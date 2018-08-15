@@ -53,7 +53,7 @@ function createPost(text, key) {
   $('#feed').append(postTemplate);
 
   $(`p[data-post-id=del${key}]`).click(function() {
-    database.ref(USER_ID + '/posts/' + key).remove();
+    database.ref('users/' + USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
@@ -67,7 +67,7 @@ function createPost(text, key) {
       $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
       $('#editModal').toggleClass('d-none');
       $('#textAreaComment').val('');
-      database.ref(USER_ID + '/posts/' + key).set({
+      database.ref('users/' + USER_ID + '/posts/' + key).set({
         text: editedPost
       });
     });
@@ -107,7 +107,7 @@ function createComment(text, key) {
   //     $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
   //     $('#editModal').toggleClass('d-none');
   //     $('#textAreaComment').val('');
-  //     database.ref(USER_ID + '/posts/' + key).set({
+  //     database.ref('users/' + USER_ID + '/posts/' + key).set({
   //       text: editedPost
   //     });
   //   });
@@ -115,7 +115,7 @@ function createComment(text, key) {
 }
 
 // Amigos
-database.ref("users/" + USER_ID).once("value")
+database.ref('users/' + USER_ID).once('value')
   .then(function(snapshot) {
     var userInfo = snapshot.val();
     $('.userName').text(userInfo.name);
@@ -132,7 +132,7 @@ database.ref('users').once('value')
 
 function createUsers(name, key) {
   if (key !== USER_ID) {
-    $(".user-name").append(`
+    $('.user-name').append(`
       <li>
         <span>${name}</span>
         <button data-user-id="${key}">Seguir</button>
