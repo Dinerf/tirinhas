@@ -90,27 +90,28 @@ function createPost(text, key) {
 
 function createComment(text, key) {
   $(`div[data-conteiner=${key}]`).append(postTemplate);
-
+  console.log(postTemplate);
+  
   $(`p[data-post-id=del${key}]`).click(function() {
     database.ref(USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
-  $(`p[data-post-id=edit${key}]`).click(function() {
-    var thisPost = this;
-    var editPost = $(thisPost).closest('.divConteiner').children('.ownPost').text();
-    $('#textAreaEdit').val(editPost);
-    $('#editModal').toggleClass('d-none');
-    $('#editModalButton').click(function() {
-      var editedPost = $('#textAreaEdit').val();
-      $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
-      $('#editModal').toggleClass('d-none');
-      $('#textAreaComment').val('');
-      database.ref(USER_ID + '/posts/' + key).set({
-        text: editedPost
-      });
-    });
-  });
+  // $(`p[data-post-id=edit${key}]`).click(function() {
+  //   var thisPost = this;
+  //   var editPost = $(thisPost).closest('.divConteiner').children('.ownPost').text();
+  //   $('#textAreaEdit').val(editPost);
+  //   $('#editModal').toggleClass('d-none');
+  //   $('#editModalButton').click(function() {
+  //     var editedPost = $('#textAreaEdit').val();
+  //     $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
+  //     $('#editModal').toggleClass('d-none');
+  //     $('#textAreaComment').val('');
+  //     database.ref(USER_ID + '/posts/' + key).set({
+  //       text: editedPost
+  //     });
+  //   });
+  // });
 }
 
 // Amigos
