@@ -4,10 +4,10 @@ $(document).ready(function() {
 
 var database = firebase.database();
 var USER_ID = window.location.search.match(/\?id=(.*)/)[1];
+var userName = $('.userName').val();
 var childKey;
 var childData;
 var userPhoto;
-var userName;
 var newPost;
 var commentKey;
 
@@ -26,24 +26,24 @@ function commentPost(event) {
 }
 
 function addPostToDB(text) {
-  return database.ref(USER_ID + '/posts').push({
+  return database.ref('users/' + USER_ID + '/posts').push({
     text: text
   });
 }
 
 function addCommentToDB(text) {
-  return database.ref(USER_ID + '/posts/' + commentKey + '/comments').push({
+  return database.ref('users/' + USER_ID + '/posts/' + commentKey + '/comments').push({
     text: text
   });
 }
 
 function getPostsFromDB() {
-  database.ref(USER_ID + '/posts').once('value')
+  database.ref('users/' + USER_ID + '/posts').once('value')
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         childKey = childSnapshot.key;
         childData = childSnapshot.val();
-        createTemplate(childData.text, childKey)
+        createTemplate(childData.text, childKey, userName)
         createPost(childData.text, childKey)
       });
     });
@@ -93,7 +93,7 @@ function createComment(text, key) {
   console.log(postTemplate);
   
   $(`p[data-post-id=del${key}]`).click(function() {
-    database.ref(USER_ID + '/posts/' + key).remove();
+    database.ref('users/' + USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
@@ -112,15 +112,13 @@ function createComment(text, key) {
   //     });
   //   });
   // });
-<<<<<<< HEAD
-=======
 }
 
 // Amigos
 database.ref("users/" + USER_ID).once("value")
   .then(function(snapshot) {
     var userInfo = snapshot.val();
-    userName.text(userInfo.name);
+    // $('userName').text(userInfo.name);
   })
 
 database.ref('users').once('value')
@@ -148,4 +146,3 @@ function createUsers(name, key) {
     });
   })
 }
->>>>>>> 82c641140fdc160282215a4fd049b691de186196
