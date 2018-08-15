@@ -1,12 +1,20 @@
+var name;
+
 $(document).ready(function() {
   $('.signUpBtn').click(function(event) {
     event.preventDefault();
 
     var email = $('.userEmail').val();
     var password = $('.userPassword').val();
+    name = $('.userName').val();
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(response) {
+        var userId = response.user.uid;
+        database.ref("users/" + userId).set({
+          name: name,
+          email: email
+        });
         window.location = 'index.html?id=' + response.user.uid;
         console.log(response);
       })
@@ -23,7 +31,6 @@ $(document).ready(function() {
 
     var email = $('.userEmail').val();
     var password = $('.userPassword').val();
-
     
     firebase.auth().signInWithEmailAndPassword(email, password)
     .then(function(response) {

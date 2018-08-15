@@ -112,3 +112,40 @@ function createComment(text, key) {
   //     });
   //   });
   // });
+<<<<<<< HEAD
+=======
+}
+
+// Amigos
+database.ref("users/" + USER_ID).once("value")
+  .then(function(snapshot) {
+    var userInfo = snapshot.val();
+    userName.text(userInfo.name);
+  })
+
+database.ref('users').once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      createUsers(childData.name, childKey);
+    });
+  })
+
+function createUsers(name, key) {
+  if (key !== USER_ID) {
+    $(".usersList").append(`
+      <li>
+        <span>${name}</span>
+        <button data-user-id="${key}">Seguir</button>
+      </li>
+    `);
+  }
+
+  $(`button[data-user-id=${key}]`).click(function() {
+    database.ref('friendship/' + USER_ID).push({
+      friendId: key
+    });
+  })
+}
+>>>>>>> 82c641140fdc160282215a4fd049b691de186196
