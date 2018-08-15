@@ -7,7 +7,7 @@ function createTemplate(text, key) {
     </div>
     <div class="divConteiner w-100 p-1">
       <div class="d-flex justify-content-between">
-        <h6 class="user-name">${userName}</h6>
+        <h6 class="user-name">${key}</h6>
         <div class="">
           <i class="far fa-comment" data-post-id=comment${key}></i>
           <i class="far fa-heart mx-3" data-post-id=like${key}></i>

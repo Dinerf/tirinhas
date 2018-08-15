@@ -90,54 +90,55 @@ function createPost(text, key) {
 
 function createComment(text, key) {
   $(`div[data-conteiner=${key}]`).append(postTemplate);
-
+  console.log(postTemplate);
+  
   $(`p[data-post-id=del${key}]`).click(function() {
     database.ref(USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
-  $(`p[data-post-id=edit${key}]`).click(function() {
-    var thisPost = this;
-    var editPost = $(thisPost).closest('.divConteiner').children('.ownPost').text();
-    $('#textAreaEdit').val(editPost);
-    $('#editModal').toggleClass('d-none');
-    $('#editModalButton').click(function() {
-      var editedPost = $('#textAreaEdit').val();
-      $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
-      $('#editModal').toggleClass('d-none');
-      $('#textAreaComment').val('');
-      database.ref(USER_ID + '/posts/' + key).set({
-        text: editedPost
-      });
-    });
-  });
+  // $(`p[data-post-id=edit${key}]`).click(function() {
+  //   var thisPost = this;
+  //   var editPost = $(thisPost).closest('.divConteiner').children('.ownPost').text();
+  //   $('#textAreaEdit').val(editPost);
+  //   $('#editModal').toggleClass('d-none');
+  //   $('#editModalButton').click(function() {
+  //     var editedPost = $('#textAreaEdit').val();
+  //     $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
+  //     $('#editModal').toggleClass('d-none');
+  //     $('#textAreaComment').val('');
+  //     database.ref(USER_ID + '/posts/' + key).set({
+  //       text: editedPost
+  //     });
+  //   });
+  // });
 }
 
-// Amigos
-var usersList = $('.usersList');
-var userName = $('.userName');
+// // Amigos
+// var usersList = $('.usersList');
+// var userName = $('.userName');
 
-$('.userBtn').click(function() {
-  getUser(userName.val());
-});
+// $('.userBtn').click(function() {
+//   getUser(userName.val());
+// });
 
-function getUser(name) {
-  var data = {
-    name: name
-  }
+// function getUser(name) {
+//   var data = {
+//     name: name
+//   }
 
-  return firebase.database().ref().child('users').push(data);
-  // return database.ref('users/' + USER_ID).push({
-  //   name: name
-  // });
-};
+//   return firebase.database().ref().child('users').push(data);
+//   // return database.ref('users/' + USER_ID).push({
+//   //   name: name
+//   // });
+// };
 
-firebase.database().ref('users').on('value', function(snapshot) {
-  usersList.innerHTML = '';
+// firebase.database().ref('users').on('value', function(snapshot) {
+//   usersList.innerHTML = '';
   
-  snapshot.forEach(function(item) {
-    var li = document.createElement('li');
-    li.appendChild(document.createTextNode(item.val().name));
-    usersList.appendChild(li);
-  });
-});
+//   snapshot.forEach(function(item) {
+//     var li = document.createElement('li');
+//     li.appendChild(document.createTextNode(item.val().name));
+//     usersList.appendChild(li);
+//   });
+// });
