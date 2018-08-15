@@ -24,6 +24,4 @@ $(document).ready(function() {
   $('.textPostButton').click(function() {
     buttonPost();
   });
-  
-
 });

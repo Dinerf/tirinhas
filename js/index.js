@@ -4,10 +4,10 @@ $(document).ready(function() {
 
 var database = firebase.database();
 var USER_ID = window.location.search.match(/\?id=(.*)/)[1];
+var userName = $('.userName').val();
 var childKey;
 var childData;
 var userPhoto;
-var userName;
 var newPost;
 var commentKey;
 
@@ -38,12 +38,12 @@ function addCommentToDB(text) {
 }
 
 function getPostsFromDB() {
-  database.ref(USER_ID + '/posts').once('value')
+  database.ref('users/' + USER_ID + '/posts').once('value')
     .then(function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         childKey = childSnapshot.key;
         childData = childSnapshot.val();
-        createTemplate(childData.text, childKey)
+        createTemplate(childData.text, childKey, userName)
         createPost(childData.text, childKey)
       });
     });
@@ -53,7 +53,7 @@ function createPost(text, key) {
   $('#feed').append(postTemplate);
 
   $(`p[data-post-id=del${key}]`).click(function() {
-    database.ref(USER_ID + '/posts/' + key).remove();
+    database.ref('users/' + USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
@@ -67,7 +67,7 @@ function createPost(text, key) {
       $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
       $('#editModal').toggleClass('d-none');
       $('#textAreaComment').val('');
-      database.ref(USER_ID + '/posts/' + key).set({
+      database.ref('users/' + USER_ID + '/posts/' + key).set({
         text: editedPost
       });
     });
@@ -93,7 +93,7 @@ function createComment(text, key) {
   console.log(postTemplate);
   
   $(`p[data-post-id=del${key}]`).click(function() {
-    database.ref(USER_ID + '/posts/' + key).remove();
+    database.ref('users/' + USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();
   });
 
@@ -107,7 +107,7 @@ function createComment(text, key) {
   //     $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
   //     $('#editModal').toggleClass('d-none');
   //     $('#textAreaComment').val('');
-  //     database.ref(USER_ID + '/posts/' + key).set({
+  //     database.ref('users/' + USER_ID + '/posts/' + key).set({
   //       text: editedPost
   //     });
   //   });
