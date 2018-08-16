@@ -12,7 +12,6 @@ $(document).ready(function() {
     $('#header').removeClass('d-flex').addClass('d-none');
   });
   $('#follow').click(function() {
-    $('#followingList').children('.d-flex ').remove();
     getFollowingFromDB();
     $('#followingModal').toggleClass('d-none');
   });

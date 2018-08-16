@@ -32,7 +32,7 @@ function buttonFind() {
         var childKey = childSnapshot.key;
         var childData = childSnapshot.val();
         if (childKey !== USER_ID && childData.name.toUpperCase().startsWith(search)) {    
-          findTemplate(childData.name, childKey);
+          findTemplate(childData.name, childKey, 'Seguir');
           $('#findList').append(findUserTemplate);
         }
         $(`button[data-follow=${childKey}]`).click(function(event) {
@@ -108,16 +108,20 @@ function getPostsFromDB() {
 }
 
 function getFollowingFromDB() {
+  $('#followingList').children('.d-flex ').remove();
   database.ref('users/' + USER_ID + '/following').once('value')
   .then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
       childKey = childSnapshot.key;
       childData = childSnapshot.val();
-        findTemplate(childData.followingName, childKey);
+        findTemplate(childData.followingName, childKey, 'Excluir');
         $('#followingList').append(findUserTemplate);
+        $(`button[data-follow="${childKey}"]`).click(function() {
+          database.ref('users/' + USER_ID + '/following/' + childKey).remove();
+          $(this).closest('.foundUser').remove();          
+        });
     });
   });
-  document.querySelectorAll('.dataFollow').value = 'Excluir';
 }
 
 function getNameFromDB() {

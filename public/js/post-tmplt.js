@@ -30,7 +30,7 @@ function createTemplate(text, key, name) {
 }
 
 var findUserTemplate;
-function findTemplate(name, key) {
+function findTemplate(name, key, button) {
   findUserTemplate = `
     <div class="d-flex align-items-center border-bottom foundUser" data-found="${key}">
       <div class="post-photo br-circle m-2">
@@ -38,7 +38,7 @@ function findTemplate(name, key) {
       </div>
       <div class="d-flex justify-content-between w-75">
         <h6 class="m-2">${name}</h6>
-        <button class="dataFollow" data-follow="${key}">Seguir</button>
+        <button data-follow="${key}">${button}</button>
       </div>
     </div>
   `
