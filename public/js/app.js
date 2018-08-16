@@ -135,6 +135,24 @@ function getFollowingPostsFromDB() {
                 }
               });
             });
+            $('#home').click(function() {
+              $("[data-uid]").each(function() {
+                  $(this).removeClass('d-none').addClass('d-flex');
+              });
+            });
+            $('#filterFollow').click(function() {
+              $("[data-uid]").each(function() {
+                var uid = $(this).data("uid");
+                if (uid == USER_ID) {
+                  $(this).removeClass('d-flex').addClass('d-none');
+                }
+              });
+            });
+            $('#filterAll').click(function() {
+              $("[data-uid]").each(function() {
+                  $(this).removeClass('d-none').addClass('d-flex');
+              });
+            });
           });
         });
       });
