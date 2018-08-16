@@ -66,7 +66,7 @@
 }
 
 @media (min-width: 769px) {
-  #feed, header, yourFeed {
+  #feed, header, .yourFeed {
     width: 60%
   }
   .absolute {
@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 768px) {
-  #feed, header, yourFeed {
+  #feed, header, .yourFeed {
     width: 70%
   }
   .absolute {
@@ -100,7 +100,7 @@
 }
 
 @media (max-width: 675px) {
-  #feed, header, yourFeed {
+  #feed, header, .yourFeed {
     width: 80%
   }
   .absolute {
@@ -117,7 +117,7 @@
 }
 
 @media (max-width: 576px) {
-  #feed, header, yourFeed {
+  #feed, header, .yourFeed {
     width: 90%
   }
   .absolute {
@@ -134,7 +134,7 @@
 }
 
 @media (max-width: 480px) {
-  #feed, header, yourFeed {
+  #feed, header, .yourFeed {
     width: 100%
   }
   .absolute {
