@@ -1,8 +1,7 @@
 $(document).ready(function() {
-  getPostsFromDB();
   getFollowingPostsFromDB()
-  getNameFromDB()
-  getFollowingFromDB();
+  getFollowingFromDB();  
+  getPostsFromDB();
 });
 
 var database = firebase.database();
@@ -13,6 +12,7 @@ var childData;
 var userPhoto;
 var newPost;
 var commentKey;
+getNameFromDB();
 
 function buttonPost() {
   newPost = $('.newPost').val();
@@ -34,7 +34,7 @@ function buttonFind() {
         var childData = childSnapshot.val();
         if (childKey !== USER_ID && childData.name.toUpperCase().startsWith(search)) {    
           findTemplate(childData.name, childKey, 'Seguir');
-          $('#findList').append(findUserTemplate);
+          $('#findList').prepend(findUserTemplate);
         }
         $(`button[data-follow=${childKey}]`).click(function(event) {
           var clickFollow = event.target.dataset.follow;
@@ -97,15 +97,22 @@ function addCommentToDB(text) {
 }
 
 function getPostsFromDB() {
-  database.ref('users/' + USER_ID + '/posts').once('value')
+  var name;
+  database.ref('users/' + USER_ID).once('value')
   .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      childKey = childSnapshot.key;
-      childData = childSnapshot.val();
-      createTemplate(childData.text, childKey, userName, USER_ID)
-      createPost(childData.text, childKey)
+    name = snapshot.val().name;
+  })
+  .then(function() {
+    database.ref('users/' + USER_ID + '/posts').once('value')
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        childKey = childSnapshot.key;
+        childData = childSnapshot.val();
+        createTemplate(childData.text, childKey, userName, USER_ID)
+        createPost(childData.text, childKey)
+      });
     });
-  });
+  }); 
 }
 
 function getFollowingPostsFromDB() {
@@ -123,7 +130,11 @@ function getFollowingPostsFromDB() {
             childData = newChildSnapshot.val();
                         
             followTemplate(childData.text, childKey, followingName, followUserID);
-            $('#feed').append(followingTemplate);
+            $('#feed').prepend(followingTemplate);
+            if($('.postVisibility').hasClass('private')) {
+              $(this).toggleClass('d-none');
+            }
+
             $(`i[data-post-id=like${childKey}]`).click(function() {
               $(this).toggleClass('liked');
             });
@@ -134,11 +145,13 @@ function getFollowingPostsFromDB() {
                   $(this).removeClass('d-flex').addClass('d-none');
                 }
               });
+              $('.filter').addClass('d-none');
             });
             $('#home').click(function() {
               $("[data-uid]").each(function() {
                   $(this).removeClass('d-none').addClass('d-flex');
               });
+              $('.filter').removeClass('d-none')
             });
             $('#filterFollow').click(function() {
               $("[data-uid]").each(function() {
@@ -170,7 +183,7 @@ function getFollowingFromDB() {
       childKey = childSnapshot.key;
       childData = childSnapshot.val();
         findTemplate(childData.followingName, childKey, 'Excluir');
-        $('#followingList').append(findUserTemplate);
+        $('#followingList').prepend(findUserTemplate);
         $(`button[data-follow="${childKey}"]`).click(function() {
           database.ref('users/' + USER_ID + '/following/' + childKey).remove();
           $(this).closest('.foundUser').remove();          
@@ -181,13 +194,17 @@ function getFollowingFromDB() {
 
 function getNameFromDB() {
   database.ref('users/' + USER_ID).once('value')
-    .then(function(snapshot) {
-      userName = snapshot.val().name;     
-    });
+  .then(function(snapshot) {
+    userName = snapshot.val().name;
+  }); 
 }
 
 function createPost(text, key) {
-  $('#feed').append(postTemplate);
+  $('#feed').prepend(postTemplate);
+  
+  $('.postVisibility').click(function() {
+    $(this).toggleClass('private').toggleClass('public');
+  });
 
   $(`p[data-post-id=del${key}]`).click(function() {
     database.ref('users/' + USER_ID + '/posts/' + key).remove();
@@ -223,13 +240,10 @@ function createPost(text, key) {
   $('#commentModal').toggleClass('d-none');
   $('#textAreaComment').val('');
   });
-  $('.postVisibility').click(function() {
-    $('.postVisibility').toggleClass('.private').toggleClass('.public');
-  });
 }
   
 function createComment(text, key) {
-  $(`div[data-conteiner=${key}]`).append(postTemplate);
+  $(`div[data-conteiner=${key}]`).prepend(postTemplate);
 
   $(`p[data-post-id=del${key}]`).click(function() {
     database.ref('users/' + USER_ID + '/posts/' + key).remove();

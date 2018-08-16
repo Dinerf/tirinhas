@@ -95,43 +95,16 @@
         </div>
       </header>
       <!-- FEED -->
+      <div class="d-flex justify-content-between align-items-center mx-2 w-100 px-2">
+        <h6>Seu feed</h6>
+        <select class="custom-select custom-select-sm w-25 filter">
+          <option selected>Filtrar</option>
+          <option value="1" id="filterAll">Todos</option>
+          <option value="2" id="filterFollow">Seguindo</option>
+        </select>
+        </div>
       <section id="feed">
-        <div class="d-flex justify-content-between align-items-center mx-2">
-          <h6>Seu feed</h6>
-          <select class="custom-select custom-select-sm w-25">
-            <option selected>Filtrar</option>
-            <option value="1" id="filterAll">Todos</option>
-            <option value="2" id="filterFollow">Seguindo</option>
-          </select>
-        </div>
-        <div class="postConteiner border m-2 d-flex" data-post-id='teste de data-id'>
-          <div class="post-photo br-circle d-flex align-items-center justify-content-center m-1">
-            <img src="../../../ImagemGenerica.png" class="generic-image">
-          </div>
-          <div class="w-100 p-1 divConteiner">
-            <div class="d-flex justify-content-between">
-              <h6 class="user-name">Dine</h6>
-              <div class="">
-                <i class="far fa-comment" id="comment"></i>
-                <i class="far fa-heart mx-3" id="like"></i>
-                <div class="btn-group dropleft">
-                  <button type="button" class="btn-invisible" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-ellipsis-v"></i>
-                  </button>
-                  <div class="dropdown-menu p-0">
-                    <p class="editPost text-center border m-1">Editar</p>
-                    <p class="deletePost text-center border m-1">Excluir</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="d-flex w-100 align-items-end justify-content-between">
-              <p class="ownPost w-90 border">Minha publicação</p>
-              <i class="far fa-eye-slash"></i>
-            </div>
-            </div>
-          </div>
-        </div>
+        
       </section>
     </main>
     <!-- FOLLOWING MODAL -->

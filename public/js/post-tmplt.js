@@ -23,7 +23,7 @@ function createTemplate(text, key, name, uid) {
           </div>
         </div>
         <div class="d-flex w-100 align-items-end justify-content-between">
-          <p class="ownPost w-90 border">${text}</p>
+          <p class="ownPost w-90">${text}</p>
           <i class="far fa-eye-slash public postVisibility"></i>
         </div>
         </div>
@@ -47,10 +47,7 @@ function followTemplate(text, key, name, uid) {
             <i class="far fa-heart mx-3" data-post-id=like${key}></i>
           </div>
         </div>
-        <div class="d-flex w-100 align-items-end justify-content-between">
-          <p class="ownPost w-90 border">${text}</p>
-          <i class="far fa-eye-slash public postVisibility"></i>
-        </div>
+          <p class="ownPost w-90">${text}</p>
         </div>
       </div>
     </div>  
