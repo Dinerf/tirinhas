@@ -6,4 +6,4 @@ var config = {
   storageBucket: "tirinhas-b67c1.appspot.com",
   messagingSenderId: "969928389793"
 };
-firebase.initializeApp(config);
+firebase.initializeApp(config); 

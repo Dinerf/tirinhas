@@ -28,4 +28,4 @@ $(document).ready(function() {
     buttonFind();
     $('#findModal').toggleClass('d-none');
   });
-});
+}); 

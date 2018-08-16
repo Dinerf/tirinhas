@@ -1,12 +1,10 @@
-var name;
-
 $(document).ready(function() {
   $('.signUpBtn').click(function(event) {
     event.preventDefault();
 
     var email = $('.userEmail').val();
     var password = $('.userPassword').val();
-    name = $('.userName').val();
+    var name = $('.userName').val();
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(function(response) {
@@ -16,7 +14,6 @@ $(document).ready(function() {
           email: email
         });
         window.location = 'app.html?id=' + response.user.uid;
-        console.log(response);
       })
       .catch(function(error) {
       var errorCode = error.code;

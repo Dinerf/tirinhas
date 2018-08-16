@@ -128,11 +128,12 @@ function getFollowingPostsFromDB() {
               $(this).toggleClass('liked');
             });
             $('#profile').click(function() {
-              if ($(!`div[data-uid=${USER_ID}]`)) {
-                // $(`div[data-uid]`).hide();
-                console.log('aaa');
-                
-              }
+              $("[data-uid]").each(function() {
+                var uid = $(this).data("uid");
+                if (uid !== USER_ID) {
+                  $(this).removeClass('d-flex').addClass('d-none');
+                }
+              });
             });
           });
         });
