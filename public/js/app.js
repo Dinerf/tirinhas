@@ -213,12 +213,13 @@ function createPost(text, key) {
 
   $(`p[data-post-id=edit${key}]`).click(function() {
     var thisPost = this;
-    var editPost = $(thisPost).closest('.divConteiner').children('.ownPost').text();
+    var editPost = $(thisPost).closest('.divConteiner').children('.postdiv').children('.ownPost').text();
+    
     $('#textAreaEdit').val(editPost);
     $('#editModal').toggleClass('d-none');
     $('#editModalButton').click(function() {
       var editedPost = $('#textAreaEdit').val();
-      $(thisPost).closest('.divConteiner').children('.ownPost').html(editedPost);
+      $(thisPost).closest('.divConteiner').children('.postdiv').children('.ownPost').html(editedPost);
       $('#editModal').toggleClass('d-none');
       $('#textAreaComment').val('');
       database.ref('users/' + USER_ID + '/posts/' + key).set({

@@ -23,6 +23,7 @@ $(document).ready(function() {
   });
   $('.textPostButton').click(function() {
     buttonPost();
+    $('.newPost').val('');
   });
   $('.findButton').click(function() {
     buttonFind();

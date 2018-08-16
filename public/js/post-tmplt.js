@@ -22,7 +22,7 @@ function createTemplate(text, key, name, uid) {
             </div>
           </div>
         </div>
-        <div class="d-flex w-100 align-items-end justify-content-between">
+        <div class="postdiv d-flex w-100 align-items-end justify-content-between">
           <p class="ownPost w-90">${text}</p>
           <i class="far fa-eye-slash public postVisibility"></i>
         </div>
