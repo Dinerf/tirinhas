@@ -223,8 +223,11 @@ function createPost(text, key) {
   $('#commentModal').toggleClass('d-none');
   $('#textAreaComment').val('');
   });
+  $('.postVisibility').click(function() {
+    $('.postVisibility').toggleClass('.private').toggleClass('.public');
+  });
 }
-
+  
 function createComment(text, key) {
   $(`div[data-conteiner=${key}]`).append(postTemplate);
 

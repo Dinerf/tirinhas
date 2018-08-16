@@ -55,6 +55,15 @@
   white-space: pre-wrap;
   word-break: break-all;
 }
+.w-90 {
+  width: 90%;
+}
+.public {
+  color: #ebcfcf;
+}
+.private {
+  color: brown;
+}
 
 @media (min-width: 769px) {
   #feed, header {
