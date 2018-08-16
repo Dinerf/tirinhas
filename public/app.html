@@ -74,10 +74,10 @@
         </button>
       </nav>
     </div>
-    <main class="">
+    <main class="d-flex flex-column align-items-center">
       <!-- PROFILE -->
-      <header class="d-none align-items-center" id="header">
-        <div class="profile-photo-field  br-circle d-flex align-items-center justify-content-center m-2">
+      <header class="d-none align-items-center justify-content-around" id="header">
+        <div class="profile-photo-field br-circle d-flex align-items-center justify-content-center m-2">
           <img src="../../ImagemGenerica.png" class="w-100 generic-image">
         </div>
         <div class="text-center">
@@ -96,17 +96,13 @@
       </header>
       <!-- FEED -->
       <section id="feed">
-        <div class="d-flex justify-content-between mx-2">
+        <div class="d-flex justify-content-between align-items-center mx-2">
           <h6>Seu feed</h6>
-          <div class="btn-group">
-              <button type="button" class="btn-invisible dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Filtrar
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">Populares</button>
-                <button class="dropdown-item" type="button">Recentes</button>
-              </div>
-            </div>
+          <select class="custom-select custom-select-sm w-25">
+            <option selected>Filtrar</option>
+            <option value="1">Todos</option>
+            <option value="2">Amigos</option>
+          </select>
         </div>
         <div class="postConteiner border m-2 d-flex" data-post-id='teste de data-id'>
           <div class="post-photo br-circle d-flex align-items-center justify-content-center m-1">
@@ -136,13 +132,13 @@
       </section>
     </main>
     <!-- FOLLOWING MODAL -->
-    <div id="followingModal" class="absolute br-round border w-75 bg-secondary d-none">
+    <div id="followingModal" class="absolute br-round border bg-secondary d-none">
       <i class="far fa-times-circle closeButton"></i>
       <h5 class="text-center">Seguindo</h5>
       <div id="followingList"></div>
     </div>
     <!-- COMMENT MODAL -->
-    <div id="commentModal" class="absolute br-round border w-75 bg-secondary p-2 d-none">
+    <div id="commentModal" class="absolute br-round border bg-secondary p-2 d-none">
       <i class="far fa-times-circle closeButton"></i>
       <h5 class="text-center">Comentar</h5>
       <div class="d-flex flex-column align-items-center">
@@ -151,7 +147,7 @@
       </div>
     </div>
     <!-- EDIT MODAL -->
-    <div id="editModal" class="absolute br-round border w-75 bg-secondary p-2 d-none">
+    <div id="editModal" class="absolute br-round border bg-secondary p-2 d-none">
       <i class="far fa-times-circle closeButton"></i>
       <h5 class="text-center">Editar post</h5>
       <div class="d-flex flex-column align-items-center">
@@ -160,7 +156,7 @@
       </div>
     </div>
     <!-- FIND MODAL -->
-    <div id="findModal" class="absolute br-round border w-75 bg-secondary d-none">
+    <div id="findModal" class="absolute br-round border bg-secondary d-none">
       <i class="far fa-times-circle closeButton"></i>
       <h5 class="text-center">Resultados</h5>
       <div id="findList"></div>

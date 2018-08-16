@@ -102,7 +102,7 @@ function getPostsFromDB() {
     snapshot.forEach(function(childSnapshot) {
       childKey = childSnapshot.key;
       childData = childSnapshot.val();
-      createTemplate(childData.text, childKey, userName)
+      createTemplate(childData.text, childKey, userName, USER_ID)
       createPost(childData.text, childKey)
     });
   });
@@ -122,10 +122,17 @@ function getFollowingPostsFromDB() {
             childKey = newChildSnapshot.key;
             childData = newChildSnapshot.val();
                         
-            followTemplate(childData.text, childKey, followingName);
+            followTemplate(childData.text, childKey, followingName, followUserID);
             $('#feed').append(followingTemplate);
             $(`i[data-post-id=like${childKey}]`).click(function() {
               $(this).toggleClass('liked');
+            });
+            $('#profile').click(function() {
+              if ($(!`div[data-uid=${USER_ID}]`)) {
+                // $(`div[data-uid]`).hide();
+                console.log('aaa');
+                
+              }
             });
           });
         });
@@ -201,8 +208,7 @@ function createPost(text, key) {
 
 function createComment(text, key) {
   $(`div[data-conteiner=${key}]`).append(postTemplate);
-  console.log(postTemplate);
-  
+
   $(`p[data-post-id=del${key}]`).click(function() {
     database.ref('users/' + USER_ID + '/posts/' + key).remove();
     $(this).closest('.postConteiner').remove();

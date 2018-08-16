@@ -1,7 +1,7 @@
 var postTemplate;
-function createTemplate(text, key, name) {
+function createTemplate(text, key, name, uid) {
   postTemplate = `
-    <div class="postConteiner border m-2 d-flex" data-conteiner=${key}>
+    <div class="postConteiner border m-2 d-flex" data-conteiner=${key} data-uid=${uid}>
       <div class="post-photo br-circle d-flex align-items-center justify-content-center m-1">
         <img src=${userPhoto}>
       </div>
@@ -29,10 +29,10 @@ function createTemplate(text, key, name) {
   `
 }
 
-var followingTemplate;
-function followTemplate(text, key, name) {
+var followingTemplate;  
+function followTemplate(text, key, name, uid) {
   followingTemplate = `
-    <div class="postConteiner border m-2 d-flex" data-conteiner=${key}>
+    <div class="postConteiner border m-2 d-flex" data-conteiner=${key} data-uid=${uid}>
       <div class="post-photo br-circle d-flex align-items-center justify-content-center m-1">
         <img src=${userPhoto}>
       </div>
