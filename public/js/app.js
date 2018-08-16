@@ -1,5 +1,6 @@
 $(document).ready(function() {
   getPostsFromDB();
+  getFollowingPostsFromDB()
   getNameFromDB()
   getFollowingFromDB();
 });
@@ -97,14 +98,42 @@ function addCommentToDB(text) {
 
 function getPostsFromDB() {
   database.ref('users/' + USER_ID + '/posts').once('value')
-    .then(function(snapshot) {
-      snapshot.forEach(function(childSnapshot) {
-        childKey = childSnapshot.key;
-        childData = childSnapshot.val();
-        createTemplate(childData.text, childKey, userName)
-        createPost(childData.text, childKey)
-      });
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      childKey = childSnapshot.key;
+      childData = childSnapshot.val();
+      createTemplate(childData.text, childKey, userName)
+      createPost(childData.text, childKey)
     });
+  });
+}
+
+function getFollowingPostsFromDB() {
+  database.ref('users/' + USER_ID + '/following').once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var followUserID = childSnapshot.val().followingID;
+      
+      database.ref('users/' + followUserID).once('value')
+      .then(function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+          childSnapshot.forEach(function(newChildSnapshot) {
+            var followingName = snapshot.val().name;
+            childKey = newChildSnapshot.key;
+            childData = newChildSnapshot.val();
+                        
+            followTemplate(childData.text, childKey, followingName);
+            $('#feed').append(followingTemplate);
+            $(`i[data-post-id=like${childKey}]`).click(function() {
+              $(this).toggleClass('liked');
+            });
+          });
+        });
+      });
+
+
+    });
+  });
 }
 
 function getFollowingFromDB() {
