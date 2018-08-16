@@ -54,7 +54,6 @@ function getNameFromDB() {
   database.ref('users/' + USER_ID).once('value')
     .then(function(snapshot) {
       userName = snapshot.val().name;
-      console.log(userName);
     });
 }
 
