@@ -11,8 +11,10 @@ $(document).ready(function() {
   $('#home').click(function() {
     $('#header').removeClass('d-flex').addClass('d-none');
   });
-  $('#friends').click(function() {
-    $('#friendsModal').toggleClass('d-none');
+  $('#follow').click(function() {
+    $('#followingList').children('.d-flex ').remove();
+    getFollowingFromDB();
+    $('#followingModal').toggleClass('d-none');
   });
   $('.closeButton').click(function () {
     $(this).parent().toggleClass('d-none');
@@ -20,8 +22,11 @@ $(document).ready(function() {
   $('#profile').click(function() {
     $('#header').addClass('d-flex').removeClass('d-none');
   });
-
   $('.textPostButton').click(function() {
     buttonPost();
+  });
+  $('.findButton').click(function() {
+    buttonFind();
+    $('#findModal').toggleClass('d-none');
   });
 });

@@ -18,12 +18,12 @@
     <!-- NAVBAR -->
     <div class="pos-f-t">
       <div class="collapse" id="navbarToggleExternalContent">
-        <div class="bg-dark p-2 d-flex justify-content-around">
+        <div class="bg-dark p-2 d-flex justify-content-around mainNavbar">
           <button class="navbar-toggler text-white">
           <i class="fas fa-home" id="home"></i>
           </button>
           <button class="navbar-toggler text-white">
-          <i class="fas fa-user-friends" id="friends"></i>
+          <i class="fas fa-user-friends" id="follow"></i>
           </button>
           <button class="navbar-toggler text-white" id="profile">
           <i class="far fa-user-circle"></i>
@@ -43,7 +43,7 @@
             <div class="bg-dark p-4">
               <div id="textPost" class="d-flex align-items-center justify-content-around">
                 <input type="text" class="w-75 newPost br-round" placeholder="No que você está pensando?">
-                 <button id="submit" class="btn btn-light textPostButton">Postar</button>
+                 <button class="btn btn-light textPostButton">Postar</button>
                 </div>
               </div>
             </div>
@@ -60,8 +60,8 @@
           <div class="collapse collapse-opt" id="ToggleSearch">
             <div class="bg-dark p-4">
               <div id="textPost" class="d-flex align-items-center justify-content-around">
-                <input type="text" class="w-75 br-round" placeholder="O que você procura?">
-                 <buttonid="submit" class="btn btn-light">Achar!</button>
+                <input type="text" class="w-75 br-round search" placeholder="O que você procura?">
+                 <button class="btn btn-light findButton">Achar!</button>
                 </div>
               </div>
             </div>
@@ -135,14 +135,14 @@
         </div>
       </section>
     </main>
-    <!-- MODAL FRIENDS -->
-    <div id="friendsModal" class="absolute br-round border w-75 bg-secondary d-none">
+    <!-- FOLLOWING MODAL -->
+    <div id="followingModal" class="absolute br-round border w-75 bg-secondary d-none">
       <i class="far fa-times-circle closeButton"></i>
       <h5 class="text-center">Seguindo</h5>
-      <div id="friendsList">
+      <div id="followingList">
         <div class="d-flex align-items-center border-bottom">
           <div class="post-photo br-circle m-2">
-            <img src="../../ImagemGenerica.png" class="generic-image">
+            <img src="../../../ImagemGenerica.png" class="generic-image">
           </div>
           <h6 class="m-2">Nome do amigo</h6>
         </div>
@@ -166,6 +166,22 @@
         <button class="mt-2 br-round w-50" id="editModalButton">Postar</button>
       </div>
     </div>
+    <!-- FIND MODAL -->
+    <div id="findModal" class="absolute br-round border w-75 bg-secondary d-none">
+        <i class="far fa-times-circle closeButton"></i>
+        <h5 class="text-center">Resultados</h5>
+        <div id="findList">
+          <div class="d-flex align-items-center border-bottom">
+            <div class="post-photo br-circle m-2">
+              <img src="../../../ImagemGenerica.png" class="generic-image">
+            </div>
+            <div class="d-flex justify-content-between w-75">
+              <h6 class="m-2">Nome do amigo</h6>
+              <button>Seguir</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" crossorigin="anonymous"></script>

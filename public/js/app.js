@@ -1,6 +1,7 @@
 $(document).ready(function() {
   getPostsFromDB();
   getNameFromDB()
+  getFollowingFromDB();
 });
 
 var database = firebase.database();
@@ -12,14 +13,70 @@ var userPhoto;
 var newPost;
 var commentKey;
 
-function buttonPost(event) {
+function buttonPost() {
   newPost = $('.newPost').val();
   var postFromDB = addPostToDB(newPost);
   createTemplate(newPost, postFromDB.key, userName)
   createPost(newPost, postFromDB.key)
 }
 
-function commentPost(event) {
+function buttonFind() {
+  $('.foundUser').remove();    
+  var search = $('.search').val().toUpperCase(); 
+  if((search).startsWith('#')) {
+
+  } else {
+    database.ref('users').once('value')
+    .then(function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        var childKey = childSnapshot.key;
+        var childData = childSnapshot.val();
+        if (childKey !== USER_ID && childData.name.toUpperCase().startsWith(search)) {    
+          findTemplate(childData.name, childKey);
+          $('#findList').append(findUserTemplate);
+        }
+        $(`button[data-follow=${childKey}]`).click(function(event) {
+          var clickFollow = event.target.dataset.follow;
+          var clickName = $(event.target).siblings('.m-2').html();
+          var match = false;
+          database.ref('users/' + USER_ID + '/following').once('value')
+          .then(function(snapshot) {            
+            snapshot.forEach(function(childSnapshot) {
+              var newChildData = childSnapshot.val().followingID;
+              
+              if(clickFollow == newChildData) {
+                match = true;
+              }
+            });
+            if(match === false) {
+              database.ref('users/' + USER_ID + '/following').push({
+                followingID: clickFollow,
+                followingName: clickName
+              });
+            }
+          }); 
+          
+          match = false;
+        })
+      });
+    });
+  }
+  $('.search').val('');
+}
+
+$('.search').click(function() {
+  if($('#findModal').is(':visible')) {
+    $('#findModal').toggleClass('d-none'); 
+  }
+});
+
+$('.mainNavbar').click(function() {
+  if($('#findModal').is(':visible')) {
+    $('#findModal').toggleClass('d-none'); 
+  }
+});
+
+function commentPost() {
   newPost = $('#textAreaComment').val();
   var postFromDB = addCommentToDB(newPost);
   createTemplate(newPost, postFromDB.key)
@@ -50,10 +107,23 @@ function getPostsFromDB() {
     });
 }
 
+function getFollowingFromDB() {
+  database.ref('users/' + USER_ID + '/following').once('value')
+  .then(function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      childKey = childSnapshot.key;
+      childData = childSnapshot.val();
+        findTemplate(childData.followingName, childKey);
+        $('#followingList').append(findUserTemplate);
+    });
+  });
+  document.querySelectorAll('.dataFollow').value = 'Excluir';
+}
+
 function getNameFromDB() {
   database.ref('users/' + USER_ID).once('value')
     .then(function(snapshot) {
-      userName = snapshot.val().name;
+      userName = snapshot.val().name;     
     });
 }
 
@@ -123,34 +193,8 @@ function createComment(text, key) {
 }
 
 // Amigos
-database.ref('users/' + USER_ID).once('value')
-  .then(function(snapshot) {
-    var userInfo = snapshot.val();
-    $('.userName').text(userInfo.name);
-  })
-
-database.ref('users').once('value')
-  .then(function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var childKey = childSnapshot.key;
-      var childData = childSnapshot.val();
-      createUsers(childData.name, childKey);
-    });
-  })
-
-function createUsers(name, key) {
-  if (key !== USER_ID) {
-    $('.user-name').append(`
-      <li>
-        <span>${name}</span>
-        <button data-user-id="${key}">Seguir</button>
-      </li>
-    `);
-  }
-
-  $(`button[data-user-id=${key}]`).click(function() {
-    database.ref('friendship/' + USER_ID).push({
-      friendId: key
-    });
-  })
-}
+// database.ref('users/' + USER_ID).once('value')
+//   .then(function(snapshot) {
+//     var userInfo = snapshot.val();
+//     $('.userName').text(userInfo.name);
+//   })
